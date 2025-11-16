@@ -1,0 +1,25 @@
+// Button action: show personalized greeting and summary
+(function() {
+  try {
+    // Use PERSONAL if available, else fallback
+    var fullname = (typeof PERSONAL !== "undefined" && PERSONAL.fullname) ? PERSONAL.fullname : "(your name)";
+    var title = (typeof PERSONAL !== "undefined" && PERSONAL.title) ? PERSONAL.title : "(title)";
+
+    var formName = (this.getField("name") && this.getField("name").value) || fullname;
+    var email = (this.getField("email") && this.getField("email").value) || "(no email)";
+    var note = "Hello " + formName + "!";
+
+    var msg = note + "\n\n" +
+              "Profile: " + title + "\n" +
+              "Email: " + email + "\n\n" +
+              "Click OK to continue.";
+
+    app.alert({
+      cTitle: "Welcome — " + formName,
+      cMsg: msg,
+      nIcon: 3
+    });
+  } catch (e) {
+    console.println("Greeting button error: " + e);
+  }
+})();
